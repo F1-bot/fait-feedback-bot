@@ -1,12 +1,18 @@
 import os
 
-from telegram.ext import CommandHandler, MessageHandler, Filters, CallbackContext
+from telegram.ext import CommandHandler, MessageHandler, Filters
 
-from settings import WELCOME_MESSAGE, TELEGRAM_SUPPORT_CHAT_ID, REPLY_TO_THIS_MESSAGE, WRONG_REPLY
+from settings import TELEGRAM_SUPPORT_CHAT_ID, REPLY_TO_THIS_MESSAGE, WRONG_REPLY
 
 
 def start(update, context):
-    update.message.reply_text(WELCOME_MESSAGE)
+    first_name = update.message.chat.first_name
+    if first_name is None:
+        first_name = 'Користувач'
+    text = f'Привіт, {first_name}, це я, бот якому ти можеш вилити свою душу, що в столовках немає терміналу, а в туалеті 5 гуртожитку вкрали двері. Слухаю тебе уважно <a href="https://i.ibb.co/dDRKp7f/Untitled-1-3.png">✌️</a>'
+
+    context.bot.send_message(chat_id=update.effective_chat.id,
+                             text=text, parse_mode='html')
 
     user_info = update.message.from_user.to_dict()
 
