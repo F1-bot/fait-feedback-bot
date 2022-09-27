@@ -6,7 +6,6 @@ from settings import WELCOME_MESSAGE, TELEGRAM_SUPPORT_CHAT_ID, REPLY_TO_THIS_ME
 
 
 def start(update, context):
-    update.message.reply_text(WELCOME_MESSAGE)
     """{ 
         'message_id': 5, 
         'date': 1605106546, 
