@@ -7,6 +7,20 @@ from settings import WELCOME_MESSAGE, TELEGRAM_SUPPORT_CHAT_ID, REPLY_TO_THIS_ME
 
 def start(update, context):
     update.message.reply_text(WELCOME_MESSAGE)
+    """{ 
+        'message_id': 5, 
+        'date': 1605106546, 
+        'chat': {'id': 49820636, 'type': 'private', 'username': 'danokhlopkov', 'first_name': 'Daniil', 'last_name': 'Okhlopkov'}, 
+        'text': 'TEST QOO', 'entities': [], 'caption_entities': [], 'photo': [], 'new_chat_members': [], 'new_chat_photo': [], 'delete_chat_photo': False, 'group_chat_created': False, 'supergroup_chat_created': False, 'channel_chat_created': False, 
+        'from': {'id': 49820636, 'first_name': 'Daniil', 'is_bot': False, 'last_name': 'Okhlopkov', 'username': 'danokhlopkov', 'language_code': 'en'}
+    }"""
+    first_name = update.message.chat.first_name
+    if first_name is None:
+        first_name = 'Користувач'
+    text = f'Привіт, {first_name}, це я, бот якому ти можеш вилити свою душу що в столовках немає терміналу, а в туалеті 5 гуртожитку вкрали двері. Слухаю тебе уважно <a href="https://i.ibb.co/dDRKp7f/Untitled-1-3.png">✌️</a>'
+
+    context.bot.send_message(chat_id=update.effective_chat.id,
+                             text=text, parse_mode='html')
 
     user_info = update.message.from_user.to_dict()
 
