@@ -1,11 +1,18 @@
 import os
 
-from telegram.ext import CommandHandler, MessageHandler, Filters
+from telegram.ext import CommandHandler, MessageHandler, Filters, CallbackContext
 
 from settings import TELEGRAM_SUPPORT_CHAT_ID, REPLY_TO_THIS_MESSAGE, WRONG_REPLY
 
 
 def start(update, context):
+    """{ 
+        'message_id': 5, 
+        'date': 1605106546, 
+        'chat': {'id': 49820636, 'type': 'private', 'username': 'danokhlopkov', 'first_name': 'Daniil', 'last_name': 'Okhlopkov'}, 
+        'text': 'TEST QOO', 'entities': [], 'caption_entities': [], 'photo': [], 'new_chat_members': [], 'new_chat_photo': [], 'delete_chat_photo': False, 'group_chat_created': False, 'supergroup_chat_created': False, 'channel_chat_created': False, 
+        'from': {'id': 49820636, 'first_name': 'Daniil', 'is_bot': False, 'last_name': 'Okhlopkov', 'username': 'danokhlopkov', 'language_code': 'en'}
+    }"""
     first_name = update.message.chat.first_name
     if first_name is None:
         first_name = 'Користувач'
@@ -13,6 +20,7 @@ def start(update, context):
 
     context.bot.send_message(chat_id=update.effective_chat.id,
                              text=text, parse_mode='html')
+    #update.message.reply_text(WELCOME_MESSAGE)
 
     user_info = update.message.from_user.to_dict()
 
